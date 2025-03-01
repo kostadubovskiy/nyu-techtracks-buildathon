@@ -1,17 +1,15 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; // Import navigation hook
+import { useNavigate } from "react-router-dom";
 import styles from "../styles/Login.module.css";
-import tedClosed from "../Images/ted_closed.png";
+import tedClosed from "../images/ted_closed.png";
+import titleImg from "../images/title.png"; // Import title image
 
 const Login = () => {
-  const navigate = useNavigate(); // Initialize navigation function
+  const navigate = useNavigate();
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>
-        <span>ROADMAP</span> <br /> TO <br /> <span>Riches</span>
-      </h1>
-      {/* Change buttons to navigate to other pages */}
+      <img src={titleImg} alt="Title" className={styles.titleImage} /> {/* Use Image Instead */}
       <button className={styles.loginBtn} onClick={() => navigate("/roadmap")}>
         Login
       </button>

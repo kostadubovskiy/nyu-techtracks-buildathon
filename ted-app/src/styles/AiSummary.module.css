@@ -16,9 +16,9 @@
 
 .dollarSign {
   position: absolute;
-  width: 80px;  /* Adjust size */
-  opacity: 0.2; /* Makes it slightly faded */
-  z-index: -1;  /* Puts it behind the title */
+  width: 80px;
+  opacity: 0.2;
+  z-index: -1;
 }
 
 .title {
@@ -26,27 +26,36 @@
   font-weight: bold;
 }
 
-.summaryBtn {
+/* Speech Bubble */
+.speechBubble {
   background-color: #ff4500;
   color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  border: none;
-  font-size: 1.2rem;
-  margin: 10px;
-  cursor: pointer;
-}
-
-.summaryBox {
-  background-color: #ff4500;
   padding: 20px;
-  border-radius: 10px;
-  color: white;
+  border-radius: 20px;
   width: 80%;
   text-align: center;
+  position: relative;
+  margin-bottom: 50px; /* More space for Ted */
 }
 
-.tedIcon {
-  width: 100px; /* Adjust size as needed */
-  margin-top: 20px;
+
+
+/* Add the triangle pointing at Ted */
+.speechBubble::after {
+  content: "";
+  position: absolute;
+  bottom: -20px; /* Adjusted position */
+  right: 50px; /* Move to bottom right */
+  border-width: 20px;
+  border-style: solid;
+  border-color: #ff4500 transparent transparent transparent;
 }
+
+/* Position Ted at the bottom corner */
+.tedIcon {
+  width: 100px;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+

@@ -1,8 +1,8 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; // Import navigation hook
+import { useNavigate } from "react-router-dom";
 import styles from "../styles/AiSummary.module.css";
-import tedOpen from "../Images/ted_open.png";
-import dollarSign from "../Images/dollarSign.png";
+import tedOpen from "../images/ted_open.png";
+import dollarSign from "../images/dollarSign.png";
 
 const AiSummary = () => {
   const navigate = useNavigate();
@@ -14,12 +14,14 @@ const AiSummary = () => {
         <h1 className={styles.title}>Financial Concept</h1>
       </div>
       <button className={styles.summaryBtn}>AI SUMMARY</button>
-      <div className={styles.summaryBox}>
+      
+      {/* Speech Bubble Container */}
+      <div className={styles.speechBubble}>
         <p>Generated AI content goes here...</p>
       </div>
+
       <img src={tedOpen} alt="Ted Open" className={styles.tedIcon} />
 
-      {/* Add navigation buttons */}
       <button onClick={() => navigate("/roadmap")}>Back to Roadmap</button>
     </div>
   );

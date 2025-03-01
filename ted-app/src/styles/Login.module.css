@@ -44,3 +44,14 @@
   font-size: 2rem;
   margin-top: 20px;
 }
+.tedIcon {
+  width: 80px;  /* Reduced from default */
+  height: auto;
+  margin-top: 10px;
+}
+
+.titleImage {
+  width: 100%;
+  max-width: 700px;  /* Increased max size */
+  margin-bottom: 20px;
+}

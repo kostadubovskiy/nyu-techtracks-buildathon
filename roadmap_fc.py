@@ -114,7 +114,7 @@ class Roadmap:
 
         message = client.messages.create(
             model="claude-3-haiku-20240307",
-            max_tokens=1000,
+            max_tokens=10000,
             temperature=0.3,
             system="You are a helpful, accurate financial advisor who explains concepts simply and effectively, to people of all experience levels.",
             messages=[
@@ -160,7 +160,7 @@ class Roadmap:
 
         message = client.messages.create(
             model="claude-3-haiku-20240307",
-            max_tokens=1000,
+            max_tokens=10000,
             temperature=0.3,
             system="You are a helpful, accurate financial advisor who explains concepts simply and effectively, to people of all experience levels.",
             messages=[

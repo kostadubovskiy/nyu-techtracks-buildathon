@@ -87,8 +87,8 @@ def generate_financial_summary(ticker, instrument_type):
     
     # Call Claude API
     message = client.messages.create(
-        model="claude-3-opus-20240229",
-        max_tokens=1000,
+        model="claude-3-haiku-20240307",
+        max_tokens=10000,
         temperature=0.3,
         system="You are a helpful, accurate financial advisor who explains concepts simply to beginners.",
         messages=[

@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: white;
+  text-align: center;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: black;
+}
+
+.title span {
+  color: #ff4500;
+}
+
+.loginBtn {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  font-size: 1.2rem;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.signupBtn {
+  background-color: #ff4500;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  font-size: 1.2rem;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.icon {
+  font-size: 2rem;
+  margin-top: 20px;
+}

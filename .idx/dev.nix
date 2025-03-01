@@ -14,6 +14,9 @@
     pkgs.git                     # Git version control
     pkgs.curl                    # cURL for HTTP requests
     pkgs.sqlite  
+    pkgs.python311Packages.flask
+    pkgs.python311Packages.flask-cors
+    pkgs.python311Packages.flask-sqlalchemy
   ];
 
   # Sets environment variables in the workspace

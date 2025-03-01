@@ -37,7 +37,7 @@ def generate_roadmap_topics(roadmap_path, previous_topics: list = None, experien
             """,
             2: f"""
                 You are an experienced financial advisor who has helped many people learn about finance.
-                An beginner who has some vague background knowledge of finance has reached out to you for help learning about {roadmap_path}.
+                A beginner who has some vague background knowledge of finance has reached out to you for help learning about {roadmap_path}.
                 Please generate a list of five topics that the user should learn about to start their path in {roadmap_path}, keeping in mind
                 that they are a beginner but have some vague background, and that the topics should be the ones most relevant to someone at their skill level.
                 Examples of topics can include:
@@ -81,13 +81,47 @@ def generate_roadmap_topics(roadmap_path, previous_topics: list = None, experien
                 You are an experienced financial advisor who has helped many people learn about finance.
                 A complete beginner has reached out to you for help learning about {roadmap_path}. They have previously learned about the following topics:
                 {previous_topics}.
-                Please generate a list of five topics that the user should learn about to start their path in {roadmap_path}, keeping in mind
+                Please generate a list of five topics that the user should learn about to continue their path in {roadmap_path}, keeping in mind
                 that they are a beginner, and that the topics should be the ones most relevant to novices.
+                 The topics can build upon/expand on the previous topics.
             """,
             2: f"""
+                You are an experienced financial advisor who has helped many people learn about finance.
+                A beginner who has some vague background knowledge of finance has reached out to you for help learning about {roadmap_path}. They have 
+                previously learned about the following topics: {previous_topics}.
+                Please generate a list of five topics that the user should learn about to continue their path in {roadmap_path}, keeping in mind
+                that they are a beginner but have some vague background, and that the topics should be the ones most relevant to someone at their skill level.
+                The topics can build upon/expand on the previous topics.
+            """,
+            3: f"""
+                You are an experienced financial advisor who has helped many people learn about finance.
+                An amateur who has some background knowledge of finance has reached out to you for help learning about {roadmap_path}. They have 
+                previously learned about the following topics: {previous_topics}.
+                Please generate a list of five topics that the user should learn about to continue their path in {roadmap_path}, keeping in mind
+                that they are have some but not significant knowledge of {roadmap_path}, and that the topics should be the ones most relevant to someone at their skill level.
+                The topics can build upon/expand on the previous topics.
+            """,
+            4: f"""
+                You are an experienced financial advisor who has helped many people learn about finance.
+                A person with sound knowledge looking to learn in more depth has reached out to you for help learning about {roadmap_path}. They have 
+                previously learned about the following topics: {previous_topics}.
+                Please generate a list of five topics that the user should learn about to continue their path in {roadmap_path}, keeping in mind
+                that they are have solid knowledge of {roadmap_path}, and that the topics should be the ones most relevant to someone at their skill level.
+                The topics can build upon/expand on the previous topics.
             """
         }
 
-    return None
+    prompt = prompts[experience_level]
 
+    message = client.messages.create(
+        model="claude-3-haiku-20240307",
+        max_tokens=1000,
+        temperature=0.3,
+        system="You are a helpful, accurate financial advisor who explains concepts simply and effectively, to people of all experience levels.",
+        messages=[
+            {"role": "user", "content": prompt}
+        ]
+    )
+
+    return message.content[0].text
         

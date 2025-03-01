@@ -11,8 +11,9 @@
     pkgs.python311Packages.pip
     pkgs.nodejs_20
     pkgs.nodePackages.nodemon
-    pkgs.git                     # Git version control
-    pkgs.curl                    # cURL for HTTP requests
+    # pkgs.nodePackages.react  # ✅ React CLI tools # ✅ If using Vite instead of CRA
+    pkgs.git                 # Git version control
+    pkgs.curl                # cURL for HTTP requests
     pkgs.sqlite  
     pkgs.python311Packages.flask
     pkgs.python311Packages.flask-cors

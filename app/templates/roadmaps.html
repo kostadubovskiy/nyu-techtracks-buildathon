@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}My Roadmaps - TechTracks{% endblock %}
+
+{% block content %}
+<div class="roadmap-header">
+    <h2>My Roadmaps</h2>
+    <button onclick="document.getElementById('roadmapForm').style.display='block'">Create New Roadmap</button>
+</div>
+
+<div id="roadmapForm" class="form-container" style="display: none;">
+    <h3>Create New Roadmap</h3>
+    <form method="POST">
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea>
+        </div>
+        <button type="submit">Create</button>
+    </form>
+</div>
+
+<div class="roadmap-list">
+    {% for roadmap in roadmaps %}
+        <div class="roadmap-card">
+            <h3>{{ roadmap.title }}</h3>
+            {% if roadmap.description %}
+                <p>{{ roadmap.description }}</p>
+            {% endif %}
+            {% if roadmap.content %}
+                <div class="roadmap-content">
+                    <pre>{{ roadmap.content }}</pre>
+                </div>
+            {% endif %}
+        </div>
+    {% else %}
+        <p>No roadmaps yet. Create your first one!</p>
+    {% endfor %}
+</div>
+{% endblock %} 

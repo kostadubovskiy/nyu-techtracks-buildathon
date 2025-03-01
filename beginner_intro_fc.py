@@ -5,8 +5,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 client = anthropic.Anthropic(
-    api_key=secret_key
-)
+       api_key=os.environ.get("ANTHROPIC_API_KEY")
+   )
 
 def generate_financial_summary(ticker, instrument_type):
     """
@@ -43,7 +43,7 @@ def generate_financial_summary(ticker, instrument_type):
         """,
         'etf': f"""
             You are a helpful financial advisor explaining concepts to beginners.
-            Please provide a beginner-friendly summary of what ETFs are, using asimple example of an ETF that holds the company with symbol {ticker}
+            Please provide a beginner-friendly summary of what ETFs are, using a simple example of a popular ETF that holds the company with symbol {ticker}
             Include information about:
             - What ETFs typically track or focus on
             - Major holdings or exposure
@@ -87,8 +87,8 @@ def generate_financial_summary(ticker, instrument_type):
     
     # Call Claude API
     message = client.messages.create(
-        model="claude-3-haiku-20240307",
-        max_tokens=10000,
+        model="claude-3-5-sonnet-20240620",
+        max_tokens=4096,
         temperature=0.3,
         system="You are a helpful, accurate financial advisor who explains concepts simply to beginners.",
         messages=[

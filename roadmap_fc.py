@@ -5,8 +5,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 client = anthropic.Anthropic(
-    api_key=secret_key
-)
+       api_key=os.environ.get("ANTHROPIC_API_KEY")
+   )
 
 class Roadmap:
     def __init__(self, roadmap_path: str, experience_level: int = 1):
@@ -113,10 +113,10 @@ class Roadmap:
         prompt = prompts[self.experience_level]
 
         message = client.messages.create(
-            model="claude-3-haiku-20240307",
-            max_tokens=10000,
+            model="claude-3-5-sonnet-20240620",
+            max_tokens=4096,
             temperature=0.3,
-            system="You are a helpful, accurate financial advisor who explains concepts simply and effectively, to people of all experience levels.",
+            system="You are a helpful, accurate financial advisor who explains concepts simply and effectively, to people of all experience levels. You generate only bullet point lists of topics.",
             messages=[
                 {"role": "user", "content": prompt}
             ]
@@ -133,7 +133,8 @@ class Roadmap:
                 You are an experienced financial advisor who has helped many people learn about finance.
                 A complete beginner has reached out to you for help learning about {self.roadmap_path}, in particular about the topic: {topic}.
                 Please generate an overview of the topic, and provide a list of resources that the user can use to learn more about the topic.
-                These resources should be ones that are most relevant to a complete beginner.
+                These resources should be ones that are most relevant to a complete beginner. 
+                Provide at most 3, well reviewed, and reputable resources.
             """,
             2: f"""
                 You are an experienced financial advisor who has helped many people learn about finance.
@@ -141,13 +142,15 @@ class Roadmap:
                 about the topic: {topic}.
                 Please generate an overview of the topic, and provide a list of resources that the user can use to learn more about the topic.
                 These resources should be ones that are most relevant to a beginner who has some vague background knowledge of finance.
+                Provide at most 3, well reviewed, and reputable resources.
             """,
             3: f"""
                 You are an experienced financial advisor who has helped many people learn about finance.
                 An amateur who has some background knowledge of finance has reached out to you for help learning about {self.roadmap_path}, in particular
                 about the topic: {topic}.
                 Please generate an overview of the topic, and provide a list of resources that the user can use to learn more about the topic.
-                These resources should be ones that are most relevant to an amateur who has some background knowledge of finance.
+                These resources should be ones that are most relevant to an amateur who has some background knowledge of finance. 
+                Provide at most 3, well reviewed, and reputable resources.
             """,
             4: f"""
                 You are an experienced financial advisor who has helped many people learn about finance.
@@ -155,17 +158,30 @@ class Roadmap:
                 about the topic: {topic}.
                 Please generate a detailed overview of the topic, and provide a list of resources that the user can use to learn more about the topic.
                 These resources should be ones that are most relevant to a person with sound knowledge looking to learn in more depth.
+                Provide at most 3, well reviewed, and reputable resources.
             """
         }
 
+        prompt = prompt[self.experience_level]
+
         message = client.messages.create(
-            model="claude-3-haiku-20240307",
-            max_tokens=10000,
+            model="claude-3-5-sonnet-20240620",
+            max_tokens=4096,
             temperature=0.3,
-            system="You are a helpful, accurate financial advisor who explains concepts simply and effectively, to people of all experience levels.",
+            system="You are a helpful, accurate financial advisor who explains concepts simply and effectively, to people of all experience levels." +
+                "You accurately and intelligently provide resources according to the user's experience level, and verify their quality and existence." + 
+                "You prioritize free resources, and provide links to the online resources, books or courses you suggest.",
             messages=[
                 {"role": "user", "content": prompt}
             ]
         )
 
         return message.content[0].text
+
+def main():
+    rmp = Roadmap("Value Investing", 1)
+    print(rmp.generate__levels())
+    print(rmp.generate_topic("Financial Statements"))
+
+if __name__ == "__main__":
+    main()

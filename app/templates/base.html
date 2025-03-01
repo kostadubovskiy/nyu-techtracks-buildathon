@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TechTracks{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <h1>TechTracks</h1>
+            <div class="nav-links">
+                <a href="{{ url_for('home') }}" {% if request.path == '/' %}class="active"{% endif %}>Home</a>
+                {% if not user %}
+                    <a href="{{ url_for('register_page') }}" {% if request.path == '/register' %}class="active"{% endif %}>Register</a>
+                    <a href="{{ url_for('login_page') }}" {% if request.path == '/login' %}class="active"{% endif %}>Login</a>
+                {% else %}
+                    <a href="{{ url_for('roadmaps_page') }}" {% if request.path == '/roadmaps' %}class="active"{% endif %}>My Roadmaps</a>
+                    <a href="{{ url_for('logout') }}">Logout</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        {% if error %}
+            <div class="flash-message flash-error">{{ error }}</div>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html> 

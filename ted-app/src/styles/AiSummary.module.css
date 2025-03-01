@@ -7,23 +7,30 @@
   position: relative;
 }
 
+/* Center title over the dollar sign */
 .titleContainer {
-  position: relative;
+  position: top;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 200px;
 }
 
 .dollarSign {
   position: absolute;
-  width: 80px;
-  opacity: 0.2;
-  z-index: -1;
+  width: 180px; /* Adjust size */
+  opacity: 0.75; /* Make it slightly faded */
+  z-index: -1;  /* Send to back */
 }
 
 .title {
   font-size: 2rem;
   font-weight: bold;
+  color: black;
+  position: relative;
+  z-index: 1;  /* Ensure it stays on top */
 }
 
 /* Speech Bubble */
@@ -59,3 +66,29 @@
   right: 20px;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  position: relative;
+}
+
+/* Wrap background elements together */
+.backgroundElements {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: -1; /* Push to the background */
+}
+
+.textBox {
+  width: 90%; /* Adjust based on screen */
+  max-width: 600px;
+}

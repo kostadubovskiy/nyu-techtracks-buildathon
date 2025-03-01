@@ -1,2 +1,2 @@
 # nyu-techtracks-buildathon
-Buildathon w/ Cosimo Hugas, Antonio Jackson, and Chase Gillis
+Buildathon w/ Cosimo Hugas, Antonio Jackson, and Chase Gillis.

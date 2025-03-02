@@ -1,5 +1,13 @@
 # Environment variables
 .env
+.env.*
+*.env
+.envrc
+.flaskenv
+env/
+.venv
+env.bak/
+venv.bak/
 
 # Python
 __pycache__/
@@ -7,21 +15,6 @@ __pycache__/
 *$py.class
 *.so
 .Python
-env/
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-*.egg-info/
-.installed.cfg
-*.egg
 
 # Output files
 scraped_articles.json

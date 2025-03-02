@@ -20,7 +20,7 @@ bp = Blueprint('lesson', __name__, url_prefix='/lesson')
 class Roadmap:
     def __init__(self, roadmap_path: str, previous_topics: list[str] = [], experience_level: int = 1):
         self.roadmap_path = roadmap_path
-        self.previous_topics = []
+        self.previous_topics = previous_topics
         self.experience_level = experience_level
         
 
@@ -187,6 +187,7 @@ class Roadmap:
 
         return message.content[0].text
     
+<<<<<<< Updated upstream
 
 # Add lesson route directly to the roadmap blueprint
 @bp.route('/<string:topic>')
@@ -237,6 +238,8 @@ def show_lesson(topic):
     return render_template('roadmap/lesson.html',
                           topic=topic,
                           content=topic_content)
+=======
+>>>>>>> Stashed changes
 
 def main():
     rmp = Roadmap("Value Investing", 1)

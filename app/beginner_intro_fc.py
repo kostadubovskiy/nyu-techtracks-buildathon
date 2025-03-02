@@ -19,71 +19,28 @@ def generate_financial_summary(ticker, instrument_type):
     Returns:
         str: A beginner-friendly summary
     """
-    # Craft prompts based on the financial instrument type
-    prompts = {
-        'stock': f"""
-            You are a helpful financial advisor explaining concepts to beginners. 
-            Please provide a beginner-friendly summary of stocks using a simple example of the stock with ticker {ticker}.
-            Include information about:
-            - What the company does
-            - Why people might invest in this stock
-            - Basic metrics beginners should know about (P/E ratio, dividend yield if applicable)
-            - Potential risks to consider
-            Keep explanations simple and avoid complex financial jargon.
-        """,
-        'index': f"""
-            You are a helpful financial advisor explaining concepts to beginners.
-            Please provide a beginner-friendly summary of indices and a simple example of an index that includes the company withsymbol {ticker}.
-            Include information about:
-            - What this index represents and tracks
-            - Major components of this index
-            - Why investors follow this index
-            - How beginners might gain exposure to this index
-            Keep explanations simple and avoid complex financial jargon.
-        """,
-        'etf': f"""
-            You are a helpful financial advisor explaining concepts to beginners.
-            Please provide a beginner-friendly summary of what ETFs are, using a simple example of a popular ETF that holds the company with symbol {ticker}
-            Include information about:
-            - What ETFs typically track or focus on
-            - Major holdings or exposure
-            - Fee structure (if you know it)
-            - Why beginners might consider this ETF
-            - Potential alternatives in the same category
-            Keep explanations simple and avoid complex financial jargon.
-        """,
-        'derivative': f"""
-            You are a helpful financial advisor explaining concepts to beginners.
-            Please provide a beginner-friendly summary of derivatives.
-            Include information about:
-            - What a derivative is
-            - The different types of assets that can be used as underlying assets for derivatives
-            - Basic mechanics of derivatives work
-            - Why investors might use derivatives
-            - Potential risks for beginners
-            - Use a simple example of a derivative with the company with symbol {ticker} as the underlying asset
-            Keep explanations simple and avoid complex financial jargon.
-        """,
-        'bond': f"""
-            You are a helpful financial advisor explaining concepts to beginners.
-            Please provide a beginner-friendly summary of bonds.
-            Include information about:
-            - Why companies/governments/etc. issue bonds
-            - An overview of the characteristics of bonds (term, yield, etc.)
-            - The importance of credit quality/rating if applicable
-            - Why investors might consider bonds
-            - How interest rate changes can affect bonds 
-            - Use a simple example of a bond with the company with symbol {ticker} as the issuer
-            Keep explanations simple and avoid complex financial jargon.
-        """
+    # Crafts prompt for instrument type using base prompt
+    base_prompt = """
+        You are a helpful financial advisor explaining concepts to beginners.
+        Please provide a beginner-friendly summary of {concept}.
+        {specific_instructions}
+        After the summary, give a brief example using the company with the ticker {ticker}. Keep explanations simple, beginner-friendly and avoid complex financial jargon.
+    """
+    
+    specific_instructions = {
+        'stock': f"Include why companies issue stocks, why people invest in stocks, basic metrics for beginners, and risks to consider.",
+        'index':f"Include what an index is, why investors follow indices, basic information for beginners.",
+        'etf': f"Include what an etf is, why investors invest in etfs, why etfs are good tools for beginners, and risks to consider.",
+        'derivative': f"Include what a derivative is, why investors invest in derivatives, and why derivatives are risky tools for beginners.",
+        'bond': f"Include what a bond is, why companies/governments/etc. issue bonds, why investors invest in bonds, and risks to consider.",
     }
     
     # Check if the instrument type is valid
-    if instrument_type.lower() not in prompts:
+    if instrument_type.lower() not in specific_instructions:
         return f"Error: '{instrument_type}' is not a supported financial instrument type. Please choose from: stock, index, etf, derivative, or bond."
     
     # Get the appropriate prompt
-    prompt = prompts[instrument_type.lower()]
+    prompt = base_prompt.format(concept=instrument_type.lower(), specific_instructions=specific_instructions[instrument_type.lower()], ticker=ticker)
     
     # Call Claude API
     message = client.messages.create(

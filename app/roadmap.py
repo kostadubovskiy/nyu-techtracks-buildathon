@@ -1,6 +1,13 @@
 import anthropic
 import os
 from dotenv import load_dotenv
+from flask import (
+    Blueprint, request, render_template, g, flash, redirect, url_for, session
+)
+
+# Import database models - adjust imports according to your actual database models
+from .models import User, UserRoadmap
+from .database import get_db
 
 load_dotenv()
 
@@ -8,8 +15,10 @@ client = anthropic.Anthropic(
        api_key=os.environ.get("ANTHROPIC_API_KEY")
    )
 
+bp = Blueprint('lesson', __name__, url_prefix='/lesson')
+
 class Roadmap:
-    def __init__(self, roadmap_path: str, experience_level: int = 1):
+    def __init__(self, roadmap_path: str, previous_topics: list[str] = [], experience_level: int = 1):
         self.roadmap_path = roadmap_path
         self.previous_topics = []
         self.experience_level = experience_level
@@ -177,6 +186,57 @@ class Roadmap:
         )
 
         return message.content[0].text
+    
+
+# Add lesson route directly to the roadmap blueprint
+@bp.route('/<string:topic>')
+def show_lesson(topic):
+    """Display a lesson for the given topic.
+    
+    Retrieves the user's roadmap info from the database and
+    generates content for the requested topic.
+    """
+    # Get the current user ID from session
+    user_id = session.get('user_id')
+    if not user_id:
+        # Redirect to login if user is not logged in
+        return redirect(url_for('login'))
+    
+    # Get database connection
+    db = get_db()
+    
+    # Query the database for user's roadmap information
+    user_roadmap = db.execute(
+        """
+        SELECT ur.roadmap_path, ur.experience_level, ur.previous_topics
+        FROM user_roadmap ur
+        WHERE ur.user_id = ?
+        """,
+        (user_id,)
+    ).fetchone()
+    
+    if not user_roadmap:
+        # If no roadmap exists for the user, create a default one or redirect
+        # This is just an example - modify according to your application logic
+        flash("No roadmap found. Please select one first.")
+        return redirect(url_for('select_roadmap'))
+    
+    # Create a Roadmap instance using the data from the database
+    roadmap_path = user_roadmap['roadmap_path']
+    experience_level = user_roadmap['experience_level']
+    # Add this topic to the user's previous topics if not already there
+    previous_topics = user_roadmap['previous_topics'].split(',') if user_roadmap['previous_topics'] else []
+    
+    # Create the Roadmap instance
+    rm = Roadmap(roadmap_path=roadmap_path, previous_topics=previous_topics, experience_level=experience_level)
+    
+    # Generate content for the topic
+    topic_content = rm.generate_topic(topic)
+    
+    # Render the template with the generated content
+    return render_template('roadmap/lesson.html',
+                          topic=topic,
+                          content=topic_content)
 
 def main():
     rmp = Roadmap("Value Investing", 1)

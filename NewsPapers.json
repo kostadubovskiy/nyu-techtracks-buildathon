@@ -1,0 +1,74 @@
+{
+  "bbc": {
+    "rss": "http://feeds.bbci.co.uk/news/business/rss.xml",
+    "link": "http://www.bbc.com/"
+  },
+  "bloomberg": {
+    "rss": "https://www.bloomberg.com/feed/podcast/bloomberg-businessweek",
+    "link": "https://www.bloomberg.com/"
+  },
+  "business_insider": {
+    "rss": "https://www.businessinsider.com/rss",
+    "link": "https://www.businessinsider.com/"
+  },
+  "cnbc": {
+    "rss": "https://www.cnbc.com/id/10001147/device/rss/rss.html",
+    "link": "https://www.cnbc.com/"
+  },
+  "coindesk": {
+    "rss": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+    "link": "https://www.coindesk.com/"
+  },
+  "cointelegraph": {
+    "rss": "https://cointelegraph.com/rss",
+    "link": "https://cointelegraph.com/"
+  },
+  "cnn_business": {
+    "rss": "http://rss.cnn.com/rss/money_news_international.rss",
+    "link": "https://www.cnn.com/business"
+  },
+  "financial_times": {
+    "rss": "https://www.ft.com/rss/home",
+    "link": "https://www.ft.com/"
+  },
+  "forbes": {
+    "rss": "https://www.forbes.com/investing/feed/",
+    "link": "https://www.forbes.com/investing/"
+  },
+  "fox_business": {
+    "rss": "http://feeds.foxnews.com/foxnews/business",
+    "link": "https://www.foxbusiness.com/"
+  },
+  "marketwatch": {
+    "rss": "https://www.marketwatch.com/rss",
+    "link": "https://www.marketwatch.com/"
+  },
+  "morningstar": {
+    "rss": "https://www.morningstar.com/rss",
+    "link": "https://www.morningstar.com/"
+  },
+  "nytimes_business": {
+    "rss": "https://rss.nytimes.com/services/xml/rss/nyt/Business.xml",
+    "link": "https://www.nytimes.com/section/business"
+  },
+  "reuters_markets": {
+    "rss": "https://www.reutersagency.com/feed/?best-sectors=markets",
+    "link": "https://www.reuters.com/markets/"
+  },
+  "the_guardian_business": {
+    "rss": "https://www.theguardian.com/uk/business/rss",
+    "link": "https://www.theguardian.com/uk/business"
+  },
+  "the_wall_street_journal": {
+    "rss": "https://feeds.a.dj.com/rss/RSSMarketsMain.xml",
+    "link": "https://www.wsj.com/market-data"
+  },
+  "washington_post_business": {
+    "rss": "http://feeds.washingtonpost.com/rss/business",
+    "link": "https://www.washingtonpost.com/business/"
+  },
+  "yahoo_finance": {
+    "rss": "https://www.yahoo.com/news/rss/business",
+    "link": "https://finance.yahoo.com/"
+  }
+}

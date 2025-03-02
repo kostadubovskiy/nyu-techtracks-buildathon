@@ -1,13 +1,6 @@
 import anthropic
 import os
 from dotenv import load_dotenv
-from flask import (
-    Blueprint, request, render_template, g, flash, redirect, url_for, session
-)
-
-# Import database models - adjust imports according to your actual database models
-from .models import User, UserRoadmap
-from .database import get_db
 
 load_dotenv()
 

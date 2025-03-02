@@ -24,3 +24,14 @@ class Roadmap(Base):
     owner_id = Column(Integer, nullable=False)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.utcnow)
+
+class Lesson(Base):
+    __tablename__ = "lessons"
+
+    id = Column(Integer, primary_key=True, index=True)
+    roadmap_parent_id = Column(Integer, nullable=False)
+    owner_id = Column(Integer, nullable=False)
+    unlocked = Column(Boolean, default=False)
+    order = Column(Integer, nullable=False)
+    name = Column(String, nullable=False)
+    content = Column(String, nullable=False)

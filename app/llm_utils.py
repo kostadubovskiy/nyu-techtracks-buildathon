@@ -3,7 +3,7 @@
 import json
 import asyncio
 import anthropic
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import List, Type, TypeVar
 import os
 

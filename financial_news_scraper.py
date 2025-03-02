@@ -8,6 +8,9 @@ import feedparser as fp
 import requests
 from newspaper import Article
 import anthropic
+from dotenv import load_dotenv
+
+load_dotenv()
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
@@ -16,10 +19,6 @@ MAX_RETRIES = 3
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 PAYWALLED_SOURCES = ["wsj.com", "nytimes.com", "ft.com", "washingtonpost.com", "cnn.com"]
-if not ANTHROPIC_API_KEY:
-    print("Warning: ANTHROPIC_API_KEY environment variable is not set.")
-    print("Please set it using: export ANTHROPIC_API_KEY='your-api-key'")
-    sys.exit(1)
 
 client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
 

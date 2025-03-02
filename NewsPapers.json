@@ -70,5 +70,9 @@
   "yahoo_finance": {
     "rss": "https://www.yahoo.com/news/rss/business",
     "link": "https://finance.yahoo.com/"
+  },
+  "Yahoo Finance": {
+    "rss": "https://finance.yahoo.com/news/rssindex",
+    "link": "finance.yahoo.com"
   }
 }

@@ -1,4 +1,4 @@
-#!/Users/antoniojackson/Documents/nyu-techtracks-buildathon/venv/bin/python3
+#!/Users/antoniojackson/Documents/nyu-techtracks-buildathon/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

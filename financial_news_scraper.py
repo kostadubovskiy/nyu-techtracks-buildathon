@@ -1,33 +1,30 @@
 import sys
 import json
 import time
+import os
 from time import mktime
 from datetime import datetime
 import feedparser as fp
 import requests
 from newspaper import Article
-import anthropic  # Import Anthropic Claude SDK
+import anthropic
 
-# Custom User-Agent to mimic a real web browser
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
 }
-
-# Maximum retries for downloading an article
 MAX_RETRIES = 3
-
-# Claude API Key
-ANTHROPIC_API_KEY = "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"
-
-# List of paywalled sources that should use NewsAPI
+ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
+NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 PAYWALLED_SOURCES = ["wsj.com", "nytimes.com", "ft.com", "washingtonpost.com", "cnn.com"]
+if not ANTHROPIC_API_KEY:
+    print("Warning: ANTHROPIC_API_KEY environment variable is not set.")
+    print("Please set it using: export ANTHROPIC_API_KEY='your-api-key'")
+    sys.exit(1)
 
-# Initialize Claude client
 client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
 
 data = {"newspapers": {}}
 
-### **Claude AI Classification**
 def is_finance_related_claude(title):
     """Uses Claude AI to determine if an article is finance-related based on its title."""
     
@@ -35,7 +32,7 @@ def is_finance_related_claude(title):
     
     Title: "{title}"
     
-    Respond with only 'YES' if the article is strictlyfinance-related (market, economy, stocks, crypto, etc), otherwise respond with 'NO'."""
+    Respond with only 'YES' if the article is strictly finance-related and could be used to inform investment decisions or educate on financial literacy (market, economy, stocks, crypto, etc), otherwise respond with 'NO'."""
 
     try:
         response = client.messages.create(

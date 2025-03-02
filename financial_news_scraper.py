@@ -186,6 +186,7 @@ def main():
     """Main function to run the news scraper."""
     
     print("Starting news scraper...")
+  
     args = sys.argv
     fname = "NewsPapers.json" if len(args) < 2 else args[1]
 
